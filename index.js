@@ -110,8 +110,49 @@ const api = new API()
 // 	console.log("result ", result)
 // })
 
-api.order.get(123).then(result => {
-	console.log("result ", result)
-})
+// api.order.get(123).then(result => {
+// 	console.log("result ", result)
+// })
+
+
+// const address_change = {
+//   itemIndex: 0,
+//   address: {
+//     name: 'My Customer',
+//     address1: '123 Scalable Drive',
+//     city: 'West Pressfield',
+//     state: 'CA',
+//     zip: '12345'
+//   }
+// }
+
+// api.order.change_address(123, address_change).then(result => {
+//   console.log("result ", result)
+// })
+
+// api.order.cancel(123).then(result => {
+//   console.log("result ", result)
+// })
+
+// const dates = { start: '2015-12-02', end: '2015-12-04' }
+// api.event.get(null, dates).then(result => {
+//   console.log("result ", result)
+// })
+
+// api.event.get(123).then(result => {
+//   console.log("result ", result)
+// })
+
+// api.event.get().then(result => {
+//   console.log("result ", result)
+// })
+
+// api.design.get(1234).then(result => {
+//   console.log("result ", result)
+// })
+
+// api.design.delete(1234).then(result => {
+//   console.log("result ", result)
+// })
 
 
