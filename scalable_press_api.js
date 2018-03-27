@@ -29,6 +29,11 @@ class API {
 		this.design_create = this.design_create.bind(this)
 		this.design_get = this.design_get.bind(this)
 		this.design_delete = this.design_delete.bind(this)
+
+		this.customization_get = this.customization_get.bind(this)
+
+		this.invoice_list = this.invoice_list.bind(this)
+		this.invoice_pay = this.invoice_pay.bind(this)
 		
 		this.product = { 
 			list_categories: this.product_list_categories,
@@ -59,6 +64,15 @@ class API {
 			create: this.design_create,
 			get: this.design_get,
 			delete: this.design_delete
+		}
+
+		this.custom = {
+			get: this.customization_get
+		}
+
+		this.invoice = {
+			get: this.invoice_list,
+			pay: this.invoice_pay
 		}
 	}
 
@@ -133,6 +147,19 @@ class API {
 
 	design_delete(designId){
 		return this.http.delete('/design/' + designId)
+	}
+
+	customization_get(){
+		return this.http.get('/customization')
+	}
+
+	invoice_list(invoiceId){
+		if(invoiceId) return this.http.get('/billing/invoice/' + invoiceId)
+		else return this.http.get('/billing/invoice')	
+	}
+
+	invoice_pay(invoiceId, payPalTransaction){
+		return this.http.post('/billing/invoice/' + invoiceId + '/pay/paypal', payPalTransaction)
 	}
 
 }

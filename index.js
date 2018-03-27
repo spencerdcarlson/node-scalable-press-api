@@ -155,4 +155,25 @@ const api = new API()
 //   console.log("result ", result)
 // })
 
+// api.custom.get().then(result => {
+//   console.log("result ", result)
+// })
+
+// api.invoice.get().then(result => {
+//   console.log("result ", result)
+// })
+
+// api.invoice.get(1234).then(result => {
+//   console.log("result ", result)
+// })
+
+const payInfo = {
+  transactionId: 'XXXXXXXXXXXX123',
+  amount: '2.00',
+  email: 'paypalaccount@scalablepress.com'
+}
+api.invoice.pay(1234567, payInfo).then(result => {
+  console.log("result ", result)
+})
+
 
