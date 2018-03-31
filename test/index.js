@@ -4,8 +4,9 @@ const API =  require("../api")
 let api
 
 test.cb.before('set up global variables', (t) => {
-   api = new API(null, 'test_XCCcCuLgPEOcWOGEZBWiPw')
-   t.end()
+	const credentials = require('../config/credentials.json')
+   	api = new API(credentials.username, credentials.password)
+   	t.end()
 })
 
 test('list categories', t => {
