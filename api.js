@@ -1,11 +1,11 @@
-const HTTP =  require("./http")
-const HTTPv3 =  require("./httpv3")
+const HTTP =  require("./lib/http")
+const HTTPv3 =  require("./lib/httpv3")
 const querystring = require('querystring');
 
 class API {
-	constructor() {
-		this.http = new HTTP(null, 'test_XCCcCuLgPEOcWOGEZBWiPw')
-		this.httpv3 = new HTTPv3(null, 'test_XCCcCuLgPEOcWOGEZBWiPw')
+	constructor(username, password) {
+		this.http = new HTTP(username, password)
+		this.httpv3 = new HTTPv3(username, password)
 		
 
 		// bind methods

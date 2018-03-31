@@ -1,4 +1,4 @@
-const API =  require("./scalable_press_api")
+const API =  require("./api")
 
 const api = new API()
 

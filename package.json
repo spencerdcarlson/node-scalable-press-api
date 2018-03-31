@@ -2,10 +2,6 @@
   "name": "scalable-press",
   "version": "1.0.0",
   "description": "Scalable Press API wrapper - https://scalablepress.com",
-  "main": "index.js",
-  "scripts": {
-    "test": "npm test"
-  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@bitbucket.org/spencerdcarlson/scalable-press.git"
@@ -20,5 +16,17 @@
   "homepage": "https://bitbucket.org/spencerdcarlson/scalable-press#readme",
   "dependencies": {
     "querystring": "^0.2.0"
+  },
+  "main": "api",
+  "scripts": {
+    "test": "ava test"
+  },
+  "files": [
+    "LICENSE",
+    "Readme.md",
+    "api.js"
+  ],
+  "devDependencies": {
+    "ava": "0.24.0"
   }
 }
