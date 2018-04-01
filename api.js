@@ -40,7 +40,7 @@ class API {
 			list: this.product_list,
 			info: this.product_information,
 			availability: this.product_availability,
-			item_info: this.product_item_information
+			detail: this.product_item_information
 		}
 
 		this.quote = {
