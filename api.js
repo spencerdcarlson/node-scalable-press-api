@@ -1,11 +1,13 @@
 const HTTP =  require("./lib/http")
 const HTTPv3 =  require("./lib/httpv3")
-const querystring = require('querystring');
+const HTTPForm =  require("./lib/http-form")
+const querystring = require('querystring')
 
 class API {
 	constructor(username, password) {
 		this.http = new HTTP(username, password)
 		this.httpv3 = new HTTPv3(username, password)
+		this.http_form = new HTTPForm(username, password)
 		
 
 		// bind methods
@@ -136,8 +138,62 @@ class API {
 	}
 
 	design_create(designObject){
+		return this.http_form.post('/design', designObject)
 		// TODO this needs to be a form upload POST with file/URL 
-		// curl "https://api.scalablepress.com/v2/design" -u ":test_XCCcCuLgPEOcWOGEZBWiPw" -F "type=screenprint" -F "sides[front][artwork]=@../images/6320.eps" -F "sides[front][colors][0]=white" -F "sides[front][dimensions][width]=5" -F "sides[front][position][horizontal]=C" -F "sides[front][position][offset][top]=2.5" -F "customization[0][id]=customization-id"
+		// curl "https://api.scalablepress.com/v2/design" \
+		//   -u ":test_XCCcCuLgPEOcWOGEZBWiPw" \
+		//   -F "type=screenprint" \
+		//   -F "sides[front][artwork]=@image.eps" \
+		//   -F "sides[front][colors][0]=white" \
+		//   -F "sides[front][dimensions][width]=5" \
+		//   -F "sides[front][position][horizontal]=C" \
+		//   -F "sides[front][position][offset][top]=2.5"
+
+
+// 		{
+//   "source": "design",
+//   "mode": "test",
+//   "type": "screenprint",
+//   "createdAt": "2018-04-01T06:06:31.718Z",
+//   "validation": {
+//     "status": "waiting"
+//   },
+//   "customization": [],
+//   "conversion": false,
+//   "review": false,
+//   "sides": {
+//     "front": {
+//       "approval": {
+//         "order": {
+//           "status": "pending",
+//           "notes": []
+//         },
+//         "artwork": {
+//           "status": "pending",
+//           "notes": []
+//         }
+//       },
+//       "colors": [
+//         "white"
+//       ],
+//       "dimensions": {
+//         "width": 5
+//       },
+//       "position": {
+//         "horizontal": "C",
+//         "offset": {
+//           "top": 2.5
+//         }
+//       },
+//       "artwork": "http://oo-prod.s3.amazonaws.com/public/designs/5ac076e7b4376570fa8c2007_sides%5Bfront%5D%5Bartwork%5D.eps",
+//       "resize": false,
+//       "aspect": 1
+//     }
+//   },
+//   "designId": "5ac076e7b4376570fa8c2007"
+// }
+
+
 		// return this.http.post('/design', designObject)
 	}
 

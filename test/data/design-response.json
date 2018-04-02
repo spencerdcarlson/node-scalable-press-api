@@ -1,0 +1,42 @@
+{
+  "source": "design",
+  "mode": "test",
+  "type": "screenprint",
+  "createdAt": "2018-04-02T03:56:20.781Z",
+  "validation": {
+    "status": "waiting"
+  },
+  "customization": [],
+  "conversion": false,
+  "review": false,
+  "sides": {
+    "front": {
+      "approval": {
+        "order": {
+          "status": "pending",
+          "notes": []
+        },
+        "artwork": {
+          "status": "pending",
+          "notes": []
+        }
+      },
+      "colors": [
+        "white"
+      ],
+      "dimensions": {
+        "width": 5
+      },
+      "position": {
+        "horizontal": "C",
+        "offset": {
+          "top": 2.5
+        }
+      },
+      "artwork": "http://oo-prod.s3.amazonaws.com/public/designs/5ac1a9e4dbf22029bd382b0c_sides%5Bfront%5D%5Bartwork%5D.eps",
+      "resize": false,
+      "aspect": 1
+    }
+  },
+  "designId": "5ac1a9e4dbf22029bd382b0c"
+}

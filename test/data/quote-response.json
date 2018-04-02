@@ -1,0 +1,27 @@
+{
+  "breakdown": [
+    {
+      "blanks": 68.51,
+      "fees": 1,
+      "printing": 85.8,
+      "shipping": 16.95,
+      "tax": 11.65
+    }
+  ],
+  "facilities": [
+    "FRESNO"
+  ],
+  "fees": 1,
+  "mode": "test",
+  "orderToken": "order_rnNWxiheaDqN4J2RDNsi3A",
+  "shipping": 16.95,
+  "sla": [
+    {
+      "days": 7
+    }
+  ],
+  "subtotal": 154.31,
+  "tax": 11.65,
+  "total": 183.91,
+  "warnings": []
+}

@@ -1,5 +1,6 @@
 const test = require('ava').test
 const API =  require("../api")
+const fs = require('fs')
 
 let api
 
@@ -56,7 +57,7 @@ test('List detailed item information', t => {
 // QUOTE API
 test('Get a quote', t => {
 	const order = {
-		"type":"dtg",
+		"type":"screenprint",
 		"products": [{
 			"id": "gildan-sweatshirt-crew",
 			"color": "ash",
@@ -70,45 +71,19 @@ test('Get a quote', t => {
 			"state": "CA",
 			"zip": "12345"
 		},
-		"designId": "53ed3a23b3730f0e27a6651"
+		"designId": "5ac1a9e4dbf22029bd382b0c"
 	}
 
 	return api.quote.get(order).then(response => {
 		response = JSON.parse(response)
 		// console.log('response ', response)
-		t.is(response.statusCode, 400)
-		t.is(response.issues[0].message, "Invalid design id: \'53ed3a23b3730f0e27a6651\'")
+		t.is(response.breakdown.length, 1)
 	})
 })
 
 // ORDER API
 test("", t => {
-	// 1. make a design => designId
-	// 2. get a qote => orderToken
-	// 3. make an order witth the Order token
-	const order = {
-		items: [{
-			itemIndex: 0,
-			address: {
-				name: "My Customer",
-				address1: "123 Scalable Drive",
-				city: "West Pressfield",
-				state: "CA",
-				zip: "12345"
-			}
-		}]
-	}
-
-	return api.order.reprint('53ed3a23b3730f0e27a6651', order).then(response => {
-		response = JSON.parse(response)
-		// console.log('response ', response)
-		t.is(response.statusCode, 500)
-		t.is(response.message, 'Cast to ObjectId failed for value "53ed3a23b3730f0e27a6651" at path "_id" for model "Order"')
-	})
-})
-
-test("", t => {
-	return api.order.place({orderToken: 'c6ae6ca449719e5237d103139255ecdd'}).then(response => {
+	return api.order.place({orderToken: 'order_rnNWxiheaDqN4J2RDNsi3A'}).then(response => {
 		response = JSON.parse(response)
 		// console.log('response ', response)
 		t.is(response.statusCode, 404)
@@ -147,8 +122,8 @@ test("", t => {
 // 	})
 // })
 
-test("", t => {
-	return api.order.get(123).then(response => {
+test("get order by id", t => {
+	return api.order.get('order_rnNWxiheaDqN4J2RDNsi3A').then(response => {
 		response = JSON.parse(response)
 		// console.log('response ', response)
 		t.is(response.statusCode, 500)
@@ -264,4 +239,43 @@ test("", t => {
 		t.is(response.message, 'Cannot make payment until billing2 transition complete')
 	})
 })
+
+// test('create design', t => {
+// 	// const design_object = {
+// 	// 	type: 'screenprint',
+// 	// 	sides: {
+// 	// 		front: {
+// 	// 			artwork: fs.createReadStream(__dirname + '/images/image.eps'),
+// 	// 			colors: ['white'],
+// 	// 			dimensions: {
+// 	// 				width: 5
+// 	// 			},
+// 	// 			position: {
+// 	// 				horizontal: 'C',
+// 	// 				offset: {
+// 	// 					top: 2.5
+// 	// 				}
+// 	// 			}
+// 	// 		}
+// 	// 	}
+// 	// }
+
+// 	const design_object = {
+// 		'type': 'screenprint',
+// 		'sides[front][artwork]': fs.createReadStream(__dirname + '/images/image.eps'),
+// 		'sides[front][colors][0]': 'white',
+// 		'sides[front][dimensions][width]': 5,
+// 		'sides[front][position][horizontal]': 'C',
+// 		'sides[front][position][offset][top]': 2.5
+// 	}
+
+
+// 	return api.design.create(design_object).then(response => {
+// 		// response = JSON.parse(response)
+// 		console.log('response ', response)
+// 		t.fail()
+// 	})
+// })
+
+
 

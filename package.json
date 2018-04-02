@@ -15,7 +15,8 @@
   "license": "ISC",
   "homepage": "https://bitbucket.org/spencerdcarlson/scalable-press#readme",
   "dependencies": {
-    "querystring": "^0.2.0"
+    "form-data": "2.3.2",
+    "querystring": "0.2.0"
   },
   "main": "api",
   "scripts": {
