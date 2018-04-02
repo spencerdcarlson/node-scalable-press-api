@@ -3,7 +3,7 @@ const Util = require('../../lib/util')
 
 let util
 
-test.cb.before('set up global variables', (t) => {
+test.cb.before('SETUP: Before all tests', (t) => {
     util = new Util()
     t.end()
 })
@@ -44,6 +44,7 @@ test('convert simple object to form notation', t => {
 test('convert nested object to form notation', t => {
     const object = { name: 'spencer', colors: [ 'blue' ], friends: { zandy: 'Alexandra', ben: 'Ben'} }
     let result = util.to_h(object , '', {})
+    // console.log(result)
     t.is(result['colors[0]'], 'blue')
     t.is(result['name'], 'spencer')
     t.is(result['friends[zandy]'], 'Alexandra')
@@ -65,35 +66,36 @@ test('convert nested object to form notation', t => {
 //     t.is(result['friends[1][ben]'], 'Ben')
 // })
 
-// test('convert design request object to form notation', t => {
-//
-//     const object = {
-//         type: 'screenprint',
-//         sides: {
-//             front: {
-//                 artwork: '/images/image.eps',
-//                 colors: ['white'],
-//                 dimensions: {
-//                     width: 5
-//                 },
-//                 position: {
-//                     horizontal: 'C',
-//                     offset: {
-//                         top: 2.5
-//                     }
-//                 }
-//             }
-//         }
-//     }
-//
-//     let result = util.to_h(object , '', {})
-//     t.is(result['type'], 'screenprint')
-//     t.is(result['sides[front][artwork]'], '/images/image.eps')
-//     t.is(result['sides[front][colors][0]'], 'white')
-//     t.is(result['sides[front][dimensions][width]'], 5)
-//     t.is(result['sides[front][position][horizontal]'], 'C')
-//     t.is(result['sides[front][position][offset][top]'], 2.5)
-// })
+test('convert design request object to form notation', t => {
+
+    const object = {
+        type: 'screenprint',
+        sides: {
+            front: {
+                artwork: '/images/image.eps',
+                colors: ['white'],
+                dimensions: {
+                    width: 5
+                },
+                position: {
+                    horizontal: 'C',
+                    offset: {
+                        top: 2.5
+                    }
+                }
+            }
+        }
+    }
+
+    let result = util.to_h(object , '', {})
+    console.log(result)
+    t.is(result['type'], 'screenprint')
+    t.is(result['sides[front][artwork]'], '/images/image.eps')
+    t.is(result['sides[front][colors][0]'], 'white')
+    t.is(result['sides[front][dimensions][width]'], 5)
+    t.is(result['sides[front][position][horizontal]'], 'C')
+    t.is(result['sides[front][position][offset][top]'], 2.5)
+})
 
 
 
