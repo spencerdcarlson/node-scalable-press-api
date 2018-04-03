@@ -240,42 +240,5 @@ test("", t => {
 	})
 })
 
-// test('create design', t => {
-// 	// const design_object = {
-// 	// 	type: 'screenprint',
-// 	// 	sides: {
-// 	// 		front: {
-// 	// 			artwork: fs.createReadStream(__dirname + '/images/image.eps'),
-// 	// 			colors: ['white'],
-// 	// 			dimensions: {
-// 	// 				width: 5
-// 	// 			},
-// 	// 			position: {
-// 	// 				horizontal: 'C',
-// 	// 				offset: {
-// 	// 					top: 2.5
-// 	// 				}
-// 	// 			}
-// 	// 		}
-// 	// 	}
-// 	// }
-
-// 	const design_object = {
-// 		'type': 'screenprint',
-// 		'sides[front][artwork]': fs.createReadStream(__dirname + '/images/image.eps'),
-// 		'sides[front][colors][0]': 'white',
-// 		'sides[front][dimensions][width]': 5,
-// 		'sides[front][position][horizontal]': 'C',
-// 		'sides[front][position][offset][top]': 2.5
-// 	}
-
-
-// 	return api.design.create(design_object).then(response => {
-// 		// response = JSON.parse(response)
-// 		console.log('response ', response)
-// 		t.fail()
-// 	})
-// })
-
 
 
