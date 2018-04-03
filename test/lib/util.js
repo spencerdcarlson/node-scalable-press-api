@@ -24,7 +24,7 @@ test('is a simple type', t => {
 
 test('convert simple object to form notation', t => {
     const object = {colors: ['blue', 'green'], name: 'spencer', age: 30, is_cool: true, brain: null}
-    let result = util.to_h(object , '', {})
+    let result = util.to_form(object , '', {})
     t.is(result['colors[0]'], 'blue')
     t.is(result['colors[1]'], 'green')
     t.is(result['name'], 'spencer')
@@ -43,7 +43,7 @@ test('convert simple object to form notation', t => {
 
 test('convert nested object to form notation', t => {
     const object = { name: 'spencer', colors: [ 'blue' ], friends: { zandy: 'Alexandra', ben: 'Ben'} }
-    let result = util.to_h(object , '', {})
+    let result = util.to_form(object , '', {})
     t.is(result['colors[0]'], 'blue')
     t.is(result['name'], 'spencer')
     t.is(result['friends[zandy]'], 'Alexandra')
@@ -58,7 +58,7 @@ test('convert nested object to form notation', t => {
 
 test('convert array of objects to form notation', t => {
     const object = { name: 'spencer', colors: [ 'blue' ], friends: [{ name: 'Alexandra'},{ name: 'Ben'}] }
-    let result = util.to_h(object , '', {})
+    let result = util.to_form(object , '', {})
     t.is(result['name'], 'spencer')
     t.is(result['colors[0]'], 'blue')
     t.is(result['friends[0][name]'], 'Alexandra')
@@ -72,7 +72,6 @@ test('convert array of objects to form notation', t => {
 })
 
 test('convert design request object to form notation', t => {
-
     const object = {
         type: 'screenprint',
         sides: {
@@ -92,7 +91,7 @@ test('convert design request object to form notation', t => {
         }
     }
 
-    let result = util.to_h(object , '', {})
+    let result = util.to_form(object , '', {})
     t.is(result['type'], 'screenprint')
     t.is(result['sides[front][artwork]'], '/images/image.eps')
     t.is(result['sides[front][colors][0]'], 'white')
