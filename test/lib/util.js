@@ -44,7 +44,6 @@ test('convert simple object to form notation', t => {
 test('convert nested object to form notation', t => {
     const object = { name: 'spencer', colors: [ 'blue' ], friends: { zandy: 'Alexandra', ben: 'Ben'} }
     let result = util.to_h(object , '', {})
-    // console.log(result)
     t.is(result['colors[0]'], 'blue')
     t.is(result['name'], 'spencer')
     t.is(result['friends[zandy]'], 'Alexandra')
@@ -57,14 +56,20 @@ test('convert nested object to form notation', t => {
     t.deepEqual(result, {})
 })
 
-// test('convert array of objects to form notation', t => {
-//     const object = { name: 'spencer', colors: [ 'blue' ], friends: [{ name: 'Alexandra'},{ name: 'Ben'}] }
-//     let result = util.to_h(object , '', {})
-//     t.is(result['name'], 'spencer')
-//     t.is(result['colors[0]'], 'blue')
-//     t.is(result['friends[0][name]'], 'Alexandra')
-//     t.is(result['friends[1][ben]'], 'Ben')
-// })
+test('convert array of objects to form notation', t => {
+    const object = { name: 'spencer', colors: [ 'blue' ], friends: [{ name: 'Alexandra'},{ name: 'Ben'}] }
+    let result = util.to_h(object , '', {})
+    t.is(result['name'], 'spencer')
+    t.is(result['colors[0]'], 'blue')
+    t.is(result['friends[0][name]'], 'Alexandra')
+    t.is(result['friends[1][name]'], 'Ben')
+    // make sure there are no extra elements
+    delete result['name']
+    delete result['colors[0]']
+    delete result['friends[0][name]']
+    delete result['friends[1][name]']
+    t.deepEqual(result, {})
+})
 
 test('convert design request object to form notation', t => {
 
@@ -88,13 +93,20 @@ test('convert design request object to form notation', t => {
     }
 
     let result = util.to_h(object , '', {})
-    console.log(result)
     t.is(result['type'], 'screenprint')
     t.is(result['sides[front][artwork]'], '/images/image.eps')
     t.is(result['sides[front][colors][0]'], 'white')
     t.is(result['sides[front][dimensions][width]'], 5)
     t.is(result['sides[front][position][horizontal]'], 'C')
     t.is(result['sides[front][position][offset][top]'], 2.5)
+    // make sure there are no extra elements
+    delete result['type']
+    delete result['sides[front][artwork]']
+    delete result['sides[front][colors][0]']
+    delete result['sides[front][dimensions][width]']
+    delete result['sides[front][position][horizontal]']
+    delete result['sides[front][position][offset][top]']
+    t.deepEqual(result, {})
 })
 
 
