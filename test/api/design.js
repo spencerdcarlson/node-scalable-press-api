@@ -1,65 +1,64 @@
 const test = require('ava').test
-const API =  require("../../api")
+const TestUtil =  require('../test_util')
 const fs = require('fs')
 
 let api
+let util
 
-test.cb.before('set up global variables', (t) => {
-    const credentials = require('../../config/credentials.json')
-    api = new API(credentials.username, credentials.password)
+const payload = {
+    type: 'screenprint',
+    sides: {
+        front: {
+            artwork: fs.createReadStream(__dirname + '/../images/image.eps'),
+            colors: ['white'],
+            dimensions: {
+                width: 5
+            },
+            position: {
+                horizontal: 'C',
+                offset: {
+                    top: 2.5
+                }
+            }
+        }
+    }
+}
+
+test.cb.before('set up global variables and call the ', (t) => {
+	util = new TestUtil()
+	api = util.api
     t.end()
 })
 
+
 // DESIGN API
-test('create design', t => {
-	const design_object = {
-		type: 'screenprint',
-		sides: {
-			front: {
-				artwork: fs.createReadStream(__dirname + '/../images/image.eps'),
-				colors: ['white'],
-				dimensions: {
-					width: 5
-				},
-				position: {
-					horizontal: 'C',
-					offset: {
-						top: 2.5
-					}
-				}
-			}
-		}
-	}
-
-	// const design_object = {
-	// 	'type': 'screenprint',
-	// 	'sides[front][artwork]': fs.createReadStream(__dirname + '/images/image.eps'),
-	// 	'sides[front][colors][0]': 'white',
-	// 	'sides[front][dimensions][width]': 5,
-	// 	'sides[front][position][horizontal]': 'C',
-	// 	'sides[front][position][offset][top]': 2.5
-	// }
-
-	return api.design.create(design_object).then(response => {
-		response = JSON.parse(response)
-        t.truthy(response.designId.match(/[0-9a-fA-F]{24}/))
-	})
-})
-
-test("", t => {
-    return api.design.get('5ac32ae52d106b77576e1ff1').then(response => {
-        response = JSON.parse(response)
-        console.log('response ', response)
-        t.is(response.statusCode, 500)
-        t.is(response.message, 'Cast to ObjectId failed for value "123" at path "_id" for model "Design"')
+test("design.create api - https://scalablepress.com/docs/#create-design-object", t => {
+    return util.create_design_object(payload).then(id => {
+        t.truthy(id.match(/[0-9a-fA-F]{24}/))
     })
 })
 
-test("", t => {
-    return api.design.delete(123).then(response => {
-        response = JSON.parse(response)
-        // console.log('response ', response)
-        t.is(response.statusCode, 500)
-        t.is(response.message, 'Cast to ObjectId failed for value "123" at path "_id" for model "Design"')
+test("design.get - https://scalablepress.com/docs/#retrieve-design-object", t => {
+    return util.create_design_object(payload).then(id => {
+      return api.design.get(id).then(response => {
+          response = JSON.parse(response)
+          t.is(response.type, payload.type)
+          t.is(response.designId, id)
+      })
     })
 })
+
+test("design.delete - https://scalablepress.com/docs/#delete-design", t => {
+    return util.create_design_object(payload).then(id => {
+        return api.design.delete(id).then(response => {
+            response = JSON.parse(response)
+            t.is(response.designId, id)
+            t.truthy(response.deletedAt)
+            t.is(new Date(response.deletedAt).toDateString(), new Date().toDateString())
+        })
+    })
+})
+
+
+
+
