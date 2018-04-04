@@ -1,6 +1,6 @@
 const API =  require("../api")
 
-class TestUtil {
+class SAPIDelegate {
 
     constructor() {
         const credentials = require('../config/credentials.json')
@@ -16,4 +16,4 @@ class TestUtil {
     }
 }
 
-module.exports = TestUtil
+module.exports = SAPIDelegate

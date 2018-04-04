@@ -1,9 +1,9 @@
 const test = require('ava').test
-const TestUtil =  require('../test_util')
+const SAPIDelegate =  require('../delegate')
 const fs = require('fs')
 
 let api
-let util
+let delegate
 
 const payload = {
     type: 'screenprint',
@@ -25,21 +25,20 @@ const payload = {
 }
 
 test.cb.before('set up global variables and call the ', (t) => {
-	util = new TestUtil()
-	api = util.api
+    delegate = new SAPIDelegate()
+	api = delegate.api
     t.end()
 })
 
-
 // DESIGN API
 test("design.create api - https://scalablepress.com/docs/#create-design-object", t => {
-    return util.create_design_object(payload).then(id => {
+    return delegate.create_design_object(payload).then(id => {
         t.truthy(id.match(/[0-9a-fA-F]{24}/))
     })
 })
 
 test("design.get - https://scalablepress.com/docs/#retrieve-design-object", t => {
-    return util.create_design_object(payload).then(id => {
+    return delegate.create_design_object(payload).then(id => {
       return api.design.get(id).then(response => {
           response = JSON.parse(response)
           t.is(response.type, payload.type)
@@ -49,7 +48,7 @@ test("design.get - https://scalablepress.com/docs/#retrieve-design-object", t =>
 })
 
 test("design.delete - https://scalablepress.com/docs/#delete-design", t => {
-    return util.create_design_object(payload).then(id => {
+    return delegate.create_design_object(payload).then(id => {
         return api.design.delete(id).then(response => {
             response = JSON.parse(response)
             t.is(response.designId, id)
@@ -58,7 +57,3 @@ test("design.delete - https://scalablepress.com/docs/#delete-design", t => {
         })
     })
 })
-
-
-
-
