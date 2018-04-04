@@ -54,32 +54,6 @@ test('List detailed item information', t => {
 	})
 })
 
-// QUOTE API
-test('Get a quote', t => {
-	const order = {
-		"type":"screenprint",
-		"products": [{
-			"id": "gildan-sweatshirt-crew",
-			"color": "ash",
-			"quantity": 12,
-			"size": "lrg"
-		}],
-		address: {
-			"name": "My Customer",
-			"address1": "123 Scalable Drive",
-			"city": "West Pressfield",
-			"state": "CA",
-			"zip": "12345"
-		},
-		"designId": "5ac1a9e4dbf22029bd382b0c"
-	}
-
-	return api.quote.get(order).then(response => {
-		response = JSON.parse(response)
-		// console.log('response ', response)
-		t.is(response.breakdown.length, 1)
-	})
-})
 
 // ORDER API
 test("", t => {
@@ -177,25 +151,6 @@ test("", t => {
 		response = JSON.parse(response)
 		// console.log('response ', response)
 		t.deepEqual(response, [])
-	})
-})
-
-// DESIGN API
-test("", t => {
-	return api.design.get(123).then(response => {
-		response = JSON.parse(response)
-		// console.log('response ', response)
-		t.is(response.statusCode, 500)
-		t.is(response.message, 'Cast to ObjectId failed for value "123" at path "_id" for model "Design"')
-	})
-})
-
-test("", t => {
-	return api.design.delete(123).then(response => {
-		response = JSON.parse(response)
-		// console.log('response ', response)
-		t.is(response.statusCode, 500)
-		t.is(response.message, 'Cast to ObjectId failed for value "123" at path "_id" for model "Design"')
 	})
 })
 
