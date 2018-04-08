@@ -4,7 +4,7 @@
   "description": "Scalable Press API wrapper - https://scalablepress.com",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/spencerdcarlson/scalable-press.git"
+    "url": "https://github.com/spencerdcarlson/node-scalable-press-api.git"
   },
   "keywords": [
     "print",
@@ -13,7 +13,7 @@
   ],
   "author": "Spencer Carlson",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/spencerdcarlson/scalable-press#readme",
+  "homepage": "https://github.com/spencerdcarlson/node-scalable-press-api",
   "dependencies": {
     "form-data": "2.3.2",
     "querystring": "0.2.0"
@@ -25,7 +25,8 @@
   "files": [
     "LICENSE",
     "Readme.md",
-    "api.js"
+    "api.js",
+    "lib/*"
   ],
   "devDependencies": {
     "ava": "0.24.0"
